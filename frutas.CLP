@@ -20,11 +20,15 @@
 
 (defrule dejar_en_linea
     (declare (salience 20))
-    ?f4 <- (robot maximo ?max naranjas ?nr manzanas ?mr caquis ?cr uvas ?ur)
-    ?f5 <- (linea naranjas ?nl manzanas ?ml caquis ?cl uvas ?ul)
+    ?f1 <- (robot maximo ?max naranjas ?nr manzanas ?mr caquis ?cr uvas ?ur)
+    ?f2 <- (linea naranjas ?nl manzanas ?ml caquis ?cl uvas ?ul)
     =>
     (assert (linea naranjas ?nr manzanas ?mr caquis ?cr uvas ?ur))
-    ;(assert (robot maximo ?max naranjas 0 manzanas 0 caquis 0 uvas 0))
-    ;(retract ?f4)
-    ;(retract ?f5)
+    (assert (robot maximo ?max naranjas 0 manzanas 0 caquis 0 uvas 0))
+    ;(retract ?f1)
+    ;(retract ?f2)
+)
+
+(defrule pedidoFinalizado
+    ?f1 <- 
 )
