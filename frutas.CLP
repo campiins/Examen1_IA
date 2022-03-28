@@ -6,6 +6,7 @@
 )
 
 (defrule recoger_naranjas
+    (declare (salience 10))
     ?f1 <- (pedido naranjas ?np $?rest1)
     ?f2 <- (palets naranjas ?n $?rest2)
     ?f3 <- (robot maximo ?max naranjas ?nr $?rest3)
@@ -13,6 +14,17 @@
 =>
     (assert (palets naranjas (- ?n ?np) $?rest2))
     (assert (robot maximo ?max naranjas (+ ?nr ?np) $?rest3))
-    ;(retract ?f2)
-    ;(retract ?f3)
+    (retract ?f2)
+    (retract ?f3)
+)
+
+(defrule dejar_en_linea
+    (declare (salience 20))
+    ?f4 <- (robot maximo ?max naranjas ?nr manzanas ?mr caquis ?cr uvas ?ur)
+    ?f5 <- (linea naranjas ?nl manzanas ?ml caquis ?cl uvas ?ul)
+    =>
+    (assert (linea naranjas ?nr manzanas ?mr caquis ?cr uvas ?ur))
+    ;(assert (robot maximo ?max naranjas 0 manzanas 0 caquis 0 uvas 0))
+    ;(retract ?f4)
+    ;(retract ?f5)
 )
